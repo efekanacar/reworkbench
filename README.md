@@ -116,7 +116,3 @@ python -m pip install -r requirements-dev.lock
 ```
 
 Doğrulama betiği testleri, varsa Node frontend kontrollerini ve ruff biçim/lint denetimini çalıştırır. Eksik bağımlılık, ekran veya socket izni gerektiren testler atlanabilir; atlanan test başarı sayılmaz. Testlerde gerçek zararlı örnek bulunmaz.
-
-## Lisans
-
-[MIT](LICENSE)
