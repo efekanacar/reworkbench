@@ -1,0 +1,9 @@
+# Supply an audited Ubuntu 24.04 reference WITH digest; no floating default.
+ARG BASE
+FROM ${BASE}
+# Use a dated Ubuntu snapshot mirror and explicit package versions in production.
+# Resulting local image ID is the runtime pin; record package manifest below.
+RUN apt-get update && apt-get install -y --no-install-recommends python3 strace \
+    && dpkg-query -W > /image-packages.txt && rm -rf /var/lib/apt/lists/*
+USER 65534:65534
+WORKDIR /work

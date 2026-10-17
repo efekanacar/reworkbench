@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark"><meta name="description" content="Yerel dosya analizi ve tersine mühendislik çalışma alanı">
+  <title>RE Workbench · Analiz Çalışma Alanı</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<svg class="icon-defs" aria-hidden="true"><defs>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m8 0h4a1 1 0 0 0 1-1v-4M3 12h18"/><path d="M8 8h8v8H8z"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 20"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M8 3v5m8-5v5M6 8h12v3a6 6 0 0 1-12 0V8zm6 9v4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 13h8m-8 4h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3m6 0h5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+</defs></svg>
+<a class="skip-link" href="#main">İçeriğe geç</a>
+<aside class="sidebar">
+  <a href="#" class="brand" aria-label="RE Workbench ana sayfa"><span class="brand-mark">re<span>_</span></span><span>RE Workbench<small>ANALYSIS STUDIO</small></span></a>
+  <div class="workspace-label">KİŞİSEL ÇALIŞMA ALANI</div>
+  <nav aria-label="Ana gezinme">
+    <button class="nav-button active" data-page="workspace"><svg><use href="#i-grid"/></svg>Çalışma alanı<span class="key-hint">01</span></button>
+    <button class="nav-button" data-page="history"><svg><use href="#i-clock"/></svg>Analiz geçmişi<span id="history-count" class="nav-count">0</span></button>
+    <div class="nav-group">ANALİZ ARAÇLARI</div>
+    <button class="nav-button" data-mode-shortcut="static"><svg><use href="#i-scan"/></svg>Statik analiz</button>
+    <button class="nav-button" data-mode-shortcut="reverse"><svg><use href="#i-code"/></svg>Tersine mühendislik</button>
+    <button class="nav-button" data-page="dynamic"><svg><use href="#i-terminal"/></svg>Dinamik analiz<span class="tiny-pill">İsteğe bağlı</span></button>
+    <div class="nav-group">BAĞLANTILAR</div>
+    <button class="nav-button" data-page="mcp"><svg><use href="#i-plug"/></svg>MCP araçları<span id="mcp-dot" class="status-dot neutral"></span></button>
+    <button class="nav-button" data-page="settings"><svg><use href="#i-settings"/></svg>Ortam ve bağımlılıklar</button>
+  </nav>
+  <div class="sidebar-bottom"><div class="local-card"><svg><use href="#i-shield"/></svg><div>Yerel çalışma modu<small>Dosyalar bu bilgisayarda kalır.</small></div><span class="status-dot"></span></div><div class="version-line"><span id="version">v0.2.1</span><span>Ubuntu · Localhost</span></div></div>
+</aside>
+<div class="app-shell">
+  <header class="topbar"><div class="breadcrumbs">Çalışma alanı<span>/</span><strong id="breadcrumb">Yeni analiz</strong></div><div class="topbar-right"><span class="local-badge"><span class="status-dot"></span>Yerel bağlantı</span><span class="avatar" title="Yerel kullanıcı">RE</span></div></header>
+  <main id="main" tabindex="-1">
+    <div id="session-warning" class="alert hidden" role="alert">Oturum bağlantısı gerekli. Aracı başlattığın terminaldeki <strong>#token=…</strong> içeren tam bağlantıyı aç.</div>
+    <div id="error-banner" class="alert hidden" role="alert"><span id="error-text"></span><button id="dismiss-error" class="icon-button" aria-label="Mesajı kapat"><svg><use href="#i-x"/></svg></button></div>
+    <section id="page-workspace" class="page">
+      <div class="page-heading"><div><div class="eyebrow"><span class="status-dot"></span> DOSYA ANALİZİ & TERSİNE MÜHENDİSLİK</div><h1>Her dosyanın bir hikâyesi var.</h1><p>Dosyanı ekle, analiz yöntemini seç, iç yapısını keşfet.</p></div><span class="outline-label"><svg><use href="#i-shield"/></svg>Güvenli varsayılanlar</span></div>
+      <div class="new-analysis-grid">
+        <section class="panel setup-panel" aria-labelledby="setup-title">
+          <div class="panel-heading"><h2 id="setup-title"><span class="step-number">1</span> Analiz yöntemini seç</h2><span class="muted small">İstediğin zaman değiştirebilirsin</span></div>
+          <div class="mode-options" role="group" aria-label="Analiz yöntemi">
+            <button class="mode-card selected" id="mode-static" data-mode="static" aria-pressed="true"><span class="mode-icon mint"><svg><use href="#i-scan"/></svg></span><span class="mode-radio"></span><strong>Statik Analiz</strong><span>Dosyayı çalıştırmadan tanı.<br>Hash, strings, yapı ve göstergeler.</span><span class="mode-foot">HIZLI İNCELEME <svg><use href="#i-arrow"/></svg></span></button>
+            <button class="mode-card" id="mode-reverse" data-mode="reverse" aria-pressed="false"><span class="mode-icon purple"><svg><use href="#i-code"/></svg></span><span class="mode-radio"></span><strong>Tersine Mühendislik</strong><span>İkili dosyanın derinliklerine in.<br>Fonksiyonlar, assembly ve hex.</span><span class="mode-foot">DERİN İNCELEME <svg><use href="#i-arrow"/></svg></span></button>
+          </div>
+          <div class="upload-heading"><h2><span class="step-number">2</span> Dosyanı ekle</h2><span class="muted small">En fazla 64 MiB</span></div>
+          <label id="dropzone" class="dropzone" for="file-input"><input id="file-input" type="file"><span class="upload-icon"><svg><use href="#i-upload"/></svg></span><strong>Dosyanı buraya sürükle</strong><span>veya <b>bilgisayarından seç</b></span><small>ELF, PE, Mach-O, PDF, arşiv, betik ve diğer dosyalar</small></label>
+          <div id="selected-file" class="selected-file hidden"><span class="file-tile"><svg><use href="#i-file"/></svg></span><div><strong id="selected-name"></strong><small id="selected-size"></small></div><button id="remove-file" class="icon-button" aria-label="Seçilen dosyayı kaldır"><svg><use href="#i-x"/></svg></button></div>
+          <div class="analysis-footer"><span class="muted small"><svg><use href="#i-shield"/></svg>Dosya çalıştırılmaz. Yalnızca yetkili olduğun dosyaları incele.</span><button id="analyze" class="button primary" disabled>Analizi başlat <svg><use href="#i-arrow"/></svg></button></div>
+        </section>
+        <aside class="context-column"><div class="panel flow-card"><span class="eyebrow">ÇALIŞMA AKIŞIN</span><h2>Karmaşıklığı geride bırak.</h2><p>Tek dosya, düzenli sonuçlar.<br>Aradığın bilgi bir sekme uzağında.</p><ol class="flow-list"><li><span>01</span><div><strong>Dosyayı tanı</strong><small>İmza, mimari ve kimlik bilgileri</small></div></li><li><span>02</span><div><strong>İçeriği keşfet</strong><small>Dizgiler, semboller ve bölümler</small></div></li><li><span>03</span><div><strong>Bulguları dışa aktar</strong><small>JSON veya Markdown raporu</small></div></li></ol><div class="flow-bottom"><svg><use href="#i-plug"/></svg><span>MCP ile iş akışını genişlet.<small>Her araç çağrısı senin onayınla.</small></span></div></div><div class="subtle-note"><svg><use href="#i-terminal"/></svg><span><strong>Kontrol sende.</strong> Dinamik analiz ayrı bir adımda, yalıtılmış ortamda ve açık onayla başlar.</span></div></aside>
+      </div>
+      <section id="progress-panel" class="panel progress-panel hidden" aria-live="polite"><div class="progress-header"><div><span class="eyebrow">ANALİZ İŞİ</span><h2 id="progress-title">Dosya inceleniyor…</h2></div><button id="cancel-analysis" class="button danger">Analizi iptal et</button></div><div class="progress-line"><span id="progress-message">Hazırlanıyor</span><strong id="progress-percent">0%</strong></div><progress id="progress-bar" max="100" value="0"></progress><div class="progress-note">İnceleme ayrı bir süreçte devam ediyor. Sonuçlar hazır olduğunda aşağıda görünecek.</div></section>
+      <section id="results" class="panel results-panel hidden" aria-label="Analiz sonuçları">
+        <div class="result-heading"><div class="result-file"><span class="file-tile"><svg><use href="#i-file"/></svg></span><div><h2 id="result-name"></h2><span id="result-subtitle" class="muted small"></span></div></div><div class="result-actions"><span class="complete-badge"><svg><use href="#i-check"/></svg>Tamamlandı</span><button class="button secondary export-button" data-format="json"><svg><use href="#i-download"/></svg>JSON</button><button class="button secondary export-button" data-format="md">Markdown</button></div></div>
+        <div id="result-stats" class="stats-grid"></div>
+        <div class="result-tabs" role="tablist" aria-label="Sonuç sekmeleri">
+          <button role="tab" id="tab-overview" data-tab="overview" aria-selected="true" aria-controls="result-content" class="result-tab active">Genel bakış</button><button role="tab" id="tab-strings" data-tab="strings" aria-selected="false" aria-controls="result-content" class="result-tab">Strings</button><button role="tab" id="tab-symbols" data-tab="symbols" aria-selected="false" aria-controls="result-content" class="result-tab">Semboller</button><button role="tab" id="tab-sections" data-tab="sections" aria-selected="false" aria-controls="result-content" class="result-tab">Bölümler</button><button role="tab" id="tab-disassembly" data-tab="disassembly" aria-selected="false" aria-controls="result-content" class="result-tab">Disassembly</button><button role="tab" id="tab-hex" data-tab="hex" aria-selected="false" aria-controls="result-content" class="result-tab">Hex</button><button role="tab" id="tab-indicators" data-tab="indicators" aria-selected="false" aria-controls="result-content" class="result-tab">Göstergeler</button>
+        </div>
+        <div id="result-content" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+          <div id="overview-view"></div>
+          <div id="table-view" class="hidden"><div class="table-toolbar"><label class="search-box"><svg><use href="#i-search"/></svg><input id="result-search" type="search" placeholder="Sonuçlarda ara…" aria-label="Sonuçlarda ara"></label><select id="result-kind" aria-label="Sonuç türü"><option value="">Tüm türler</option></select><button id="copy-results" class="button secondary"><svg><use href="#i-copy"/></svg>Görünümü kopyala</button></div><p id="module-note" class="module-note"></p><div id="table-container" class="table-container"></div><div class="pagination"><span id="row-count" class="muted small"></span><div><button id="prev-page" class="button secondary">← Önceki</button><button id="next-page" class="button secondary">Sonraki →</button></div></div></div>
+          <div id="hex-view" class="hidden"><div class="table-toolbar"><label class="hex-address">Dosya ofseti <input id="hex-address" value="0x0" aria-label="Hex dosya ofseti" spellcheck="false"></label><button id="hex-go" class="button secondary">Adrese git</button><button id="hex-next" class="button secondary">Sonraki 4 KiB →</button><button id="copy-hex" class="button secondary"><svg><use href="#i-copy"/></svg>Kopyala</button></div><p class="module-note">Adresler dosya ofsetidir. Sol: adres · Orta: baytlar · Sağ: ASCII</p><pre id="hex-output" class="code-output"></pre></div>
+        </div>
+      </section>
+      <section id="recent-section" class="recent-section"><div class="section-heading"><h2>Son analizler</h2><button id="all-history" class="text-button">Tümünü görüntüle <svg><use href="#i-arrow"/></svg></button></div><div id="recent-list" class="recent-list"></div></section>
+    </section>
+    <section id="page-history" class="page hidden"><div class="page-heading"><div><div class="eyebrow">YEREL ARŞİV</div><h1>Analiz geçmişi</h1><p>Önceki incelemelerini yeniden aç ve raporlarını indir.</p></div></div><div id="history-list" class="panel history-list"></div></section>
+    <section id="page-mcp" class="page hidden"><div class="page-heading"><div><div class="eyebrow">İŞ AKIŞI ENTEGRASYONU</div><h1>MCP araçları</h1><p>Sunucunun sunduğu araçları keşfet. Her çağrıda ne gönderileceğini gör.</p></div></div><div class="panel integration-panel"><div class="integration-header"><div><h2 id="mcp-connection">Bağlı değil</h2><p id="mcp-message" class="muted">Bağlantı adresini ortam değişkenleri veya yerel JSON dosyasıyla ayarla.</p></div><div class="button-group"><button id="mcp-connect" class="button primary"><svg><use href="#i-plug"/></svg>Sunucuya bağlan</button><button id="mcp-refresh" class="button secondary">Yenile</button><button id="mcp-disconnect" class="button secondary">Bağlantıyı kes</button></div></div><div class="info-strip">Dosya içeriği otomatik gönderilmez. Parametrelere yazdığın bilgiler yalnızca açık onayından sonra sunucuya iletilir.</div><div class="mcp-layout"><div id="mcp-tools" class="mcp-tools"><div class="empty-state">Bağlanınca araçlar burada görünecek.</div></div><div class="mcp-editor"><h3 id="mcp-tool-title">Bir araç seç</h3><p id="mcp-tool-description" class="muted"></p><details><summary>Giriş şemasını incele</summary><pre id="mcp-schema" class="code-output">{}</pre></details><label for="mcp-arguments">Gönderilecek JSON parametreleri</label><textarea id="mcp-arguments" rows="7" spellcheck="false">{}</textarea><button id="mcp-prepare" class="button primary" disabled>Çağrıyı gözden geçir <svg><use href="#i-arrow"/></svg></button></div></div><h3>Araç yanıtı</h3><pre id="mcp-output" class="code-output">Henüz bir araç çağrılmadı.</pre></div></section>
+    <section id="page-dynamic" class="page hidden"><div class="page-heading"><div><div class="eyebrow">KONTROLLÜ ÇALIŞTIRMA</div><h1>Dinamik analiz</h1><p>Önce statik analizi tamamla, ardından yalıtılmış çalıştırma planını incele.</p></div><span class="outline-label">Deneysel</span></div><div class="panel integration-panel"><div class="safety-hero"><span class="mode-icon mint"><svg><use href="#i-shield"/></svg></span><div><h2>Kapalı başlar. Sen onaylarsan çalışır.</h2><p>Ağ erişimi kapalı rootless Podman, salt okunur girdi ve kaynak sınırları kullanılır. Ana makinede doğrudan çalıştırma yapılmaz.</p></div></div><div class="limit-chips"><span>Ağ yok</span><span>1 CPU</span><span>256 MiB bellek</span><span>20 saniye</span><span>64 süreç</span></div><p id="dynamic-file" class="muted">Çalışma alanından bir dosyanın statik analizini tamamla.</p><button id="dynamic-prepare" class="button primary">Ortamı denetle ve planı göster</button><button id="dynamic-cancel" class="button danger">İptal et</button><p id="dynamic-message" class="module-note"></p><pre id="dynamic-output" class="code-output">Henüz çalıştırılmadı.</pre></div></section>
+    <section id="page-settings" class="page hidden"><div class="page-heading"><div><div class="eyebrow">ÇALIŞMA ORTAMI</div><h1>Ortam ve bağımlılıklar</h1><p>Kullanılabilir araçları ve analiz kapsamını tek bakışta gör.</p></div></div><div id="capabilities" class="panel integration-panel"></div><div class="panel integration-panel settings-note"><h2>Yerel ve kontrollü</h2><p>Sunucu yalnızca 127.0.0.1 üzerinde dinler. API istekleri başlangıçta üretilen kişisel oturum anahtarıyla doğrulanır. Dosyalar özel yerel depoda tutulur.</p><p>MCP ayarları: <code>REWB_MCP_URL</code> veya <code>REWB_MCP_CONFIG</code>. Token bilgilerini arayüze veya rapora yazma.</p></div></section>
+    <footer class="main-footer"><span>RE Workbench <span class="muted">/</span> İç yapıyı anla.</span><span>Yerel analiz · Açık onay · Kontrol sende</span></footer>
+  </main>
+</div>
+<dialog id="approval-dialog"><div class="dialog-heading"><span class="mode-icon mint"><svg><use href="#i-shield"/></svg></span><div><span class="eyebrow">İŞLEM ONAYI</span><h2 id="approval-title">İşlemi gözden geçir</h2></div></div><p id="approval-description"></p><pre id="approval-payload" class="code-output"></pre><label class="approval-check"><input id="approval-check" type="checkbox">Gösterilen işlemi ve varsa tüm veri gönderimini açıkça onaylıyorum.</label><div class="dialog-actions"><button id="approval-cancel" class="button secondary">Vazgeç</button><button id="approval-confirm" class="button primary" disabled>Onayla ve başlat</button></div></dialog>
+<div id="toast" class="toast hidden" role="status"></div>
+</body></html>

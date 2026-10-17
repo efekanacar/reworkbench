@@ -1,0 +1,29 @@
+# Python and tooling
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Local settings and analysis data
+.env
+.env.*
+!.env.example
+mcp-config.local.json
+quarantine/
+reports/
+uploads/
+*.log
+*.db
+*.sqlite*
+
+# Editor and operating system
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reworkbench"
+version = "0.2.1"
+description = "Local browser-based static analysis and reverse engineering workbench"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = []
+
+[project.optional-dependencies]
+analysis = ["pyelftools==0.32", "capstone==5.0.6"]
+mcp = ["mcp==2.3.0", "jsonschema==4.26.0"]
+dev = ["pytest==8.4.2", "ruff==0.14.14"]
+
+[project.scripts]
+reworkbench = "reworkbench.webapp:main"
+
+[tool.setuptools.packages.find]
+include = ["reworkbench*"]
+
+[tool.setuptools.package-data]
+reworkbench = ["web/*.html", "web/*.css", "web/*.js", "web/*.svg"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
